@@ -1,0 +1,69 @@
+project:
+  name: "my_study"                # used in output file naming
+
+tracks:
+  directory: "tracks/"
+  file_pattern: "*.csv"
+  format:
+    id_col: "id"
+    date_col: "date"
+    lon_col: "lon"
+    lat_col: "lat"
+    se_x_col: null                # null → use fixed_se_km or location_class
+    se_y_col: null                # null → use fixed_se_km or location_class
+    location_class_col: null      # e.g., "lc" — derives SE from Argos LC table
+    fixed_se_km: 50.0            # fallback when no SE or LC columns
+    extra_columns: []             # additional columns to preserve in output (e.g., ["depth", "speed"])
+    id_from_filename: false
+    id_filename_separator: "_"
+    id_filename_index: 0
+  id_filter_csv: null             # optional CSV to filter IDs
+  id_filter_col: "ID"
+
+extraction:
+  se_cap_km: 200.0
+  sigma_multiplier: 2.0
+  padding_km: 50.0
+
+paths:
+  raw_dir: "data/raw"
+  output_dir: "data/output"
+
+# Uncomment and customize to override built-in variable definitions:
+# variables:
+#   sst:
+#     source: erddap
+#     server: "https://coastwatch.pfeg.noaa.gov/erddap"
+#     dataset_id: jplMURSST41
+#     variable_names: [analysed_sst]
+#     extract_variable: analysed_sst
+#     resolution_deg: 0.01
+#     stride: 5
+#   chl:
+#     source: erddap
+#     server: "https://coastwatch.pfeg.noaa.gov/erddap"
+#     dataset_id: erdMH1chla8day
+#     variable_names: [chlorophyll]
+#     extract_variable: chlorophyll
+#     resolution_deg: 0.04
+#   sal:
+#     source: copernicus
+#     dataset_id: cmems_mod_glo_phy_my_0.083deg_P1D-m
+#     variable_names: [so]
+#     extract_variable: so
+#     depth: 0.494
+#     resolution_deg: 0.083
+#   ssh:
+#     source: copernicus
+#     dataset_id: cmems_mod_glo_phy_my_0.083deg_P1D-m
+#     variable_names: [zos]
+#     extract_variable: zos
+#     resolution_deg: 0.083
+#   eke:
+#     source: copernicus
+#     dataset_id: cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.125deg_P1D
+#     variable_names: [ugosa, vgosa]
+#     extract_variable: eke
+#     derived: true
+#     derivation: eke_from_geostrophic
+#     resolution_deg: 0.125
